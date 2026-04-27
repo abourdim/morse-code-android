@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changes — Morse Kids Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Righteous&family=Tajawal:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08091a; --panel: #0b0d24;
+  --accent: #d4a03c; --accent2: #0ea5e9;
+  --text: #e4ddd0; --text-muted: #8a7e6e;
+  --border: rgba(212,160,60,.18);
+  --code-bg: rgba(0,0,0,.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Tajawal', system-ui, sans-serif;
+  line-height: 1.7; padding: 20px;
+  display: flex; justify-content: center;
+}
+.doc {
+  max-width: 820px; width: 100%;
+  background: radial-gradient(ellipse at top, rgba(212,160,60,.08), transparent 55%), var(--panel);
+  border: 1px solid var(--border); border-radius: 18px;
+  padding: 30px 36px; margin: 20px 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.bismillah {
+  text-align: center; font-family: 'Amiri', serif;
+  font-size: 14px; color: var(--accent); opacity: .5;
+  margin-bottom: 20px;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none;
+  font-size: .82rem; font-weight: 600;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.3);
+  transition: all .2s; margin-bottom: 20px;
+}
+.back-link:hover { border-color: var(--accent); box-shadow: 0 0 12px rgba(212,160,60,.15); }
+h1 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1.8rem; letter-spacing: .04em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px; line-height: 1.3;
+}
+h2 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1.2rem; color: var(--accent);
+  margin: 28px 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: .04em;
+}
+h3 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1rem; color: var(--accent2);
+  margin: 20px 0 8px;
+}
+h4 {
+  font-size: .9rem; color: var(--accent);
+  margin: 14px 0 6px;
+}
+p { margin: 8px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: var(--text); }
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 8px 16px; margin: 12px 0;
+  background: rgba(0,0,0,.2); border-radius: 0 8px 8px 0;
+  color: var(--text-muted); font-style: italic;
+}
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .82em; background: var(--code-bg);
+  padding: 2px 6px; border-radius: 4px;
+  color: var(--accent2);
+}
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px; margin: 12px 0;
+  overflow-x: auto;
+}
+pre code {
+  background: none; padding: 0;
+  font-size: .78rem; line-height: 1.5;
+  color: var(--text-muted);
+}
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 12px 0; font-size: .84rem;
+}
+th {
+  background: rgba(212,160,60,.1);
+  color: var(--accent); font-weight: 700;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Righteous', sans-serif;
+  font-size: .78rem; letter-spacing: .04em;
+  text-transform: uppercase;
+}
+td {
+  padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.05);
+  color: var(--text-muted);
+}
+tr:hover td { background: rgba(255,255,255,.02); }
+ul, ol { margin: 8px 0; padding-left: 24px; }
+li { margin: 4px 0; color: var(--text-muted); }
+li strong { color: var(--text); }
+hr {
+  border: none; height: 1px; margin: 24px 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: .3;
+}
+kbd {
+  display: inline-block; padding: 2px 7px;
+  border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem; background: rgba(0,0,0,.4);
+  border: 1px solid var(--border); color: var(--accent);
+}
+.footer {
+  text-align: center; margin-top: 30px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: .76rem; color: var(--text-muted);
+}
+@media (max-width: 600px) {
+  .doc { padding: 20px 16px; }
+  h1 { font-size: 1.4rem; }
+  table { font-size: .76rem; }
+  th, td { padding: 6px 8px; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="bismillah">✦ بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ✦</div>
+  <a href="index.html" class="back-link">← Back to App</a>
+  <h1 id="changes-morse-kids-lab">📋 Changes — Morse Kids Lab</h1>
+<p>All notable changes to this project are documented here.
+Format follows <a href="https://keepachangelog.com/">Keep a Changelog</a>.</p>
+<hr />
+<h2 id="v12-2025-02-22">[v1.2] — 2025-02-22</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li><strong>Help modal i18n</strong> — All help modal text (Quick Start steps, controls, Morse basics, keyboard shortcuts, about) now fully translates to all 3 languages (EN/FR/AR)</li>
+<li><strong>HTML keys with markup</strong> — <code>setLanguage()</code> now uses <code>innerHTML</code> for keys containing <code>&lt;strong&gt;</code> tags (qs1–qs6)</li>
+<li><strong>File naming</strong> — Renamed <code>CHANGELOG</code> → <code>CHANGES</code> (as per project convention)</li>
+<li><strong>Doc links</strong> — Help modal footer links now point to correct <code>CHANGES.html</code></li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li><strong>30+ i18n keys</strong> added to all 3 language dictionaries for the Help modal:</li>
+<li>Quick Start steps (qs1–qs6) in AR/EN/FR</li>
+<li>Controls labels (hLang, hTheme, hLevel, hBle) with descriptions</li>
+<li>Morse Basics (ditDesc, dahDesc, sosDesc, oDesc, sosFullDesc)</li>
+<li>Keyboard shortcuts (kTabs, kConnect, kClose)</li>
+<li>Section headers (quickStart, controls, morseBasics, keyboard, about)</li>
+<li>About text (aboutText) in all 3 languages</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Version bumped from v1.1 → v1.2</li>
+<li><code>CHANGELOG.md/.html</code> renamed to <code>CHANGES.md/.html</code></li>
+<li>About text updated to v1.2 in all languages</li>
+</ul>
+<hr />
+<h2 id="v11-2025-02-22">[v1.1] — 2025-02-22</h2>
+<h3 id="added_1">Added</h3>
+<ul>
+<li><strong>Floating Help Button (FAB)</strong> — persistent <code>?</code> button in bottom-left corner with pulse animation</li>
+<li><strong>Help Modal</strong> — full overlay modal with quick start guide, controls reference, Morse basics, keyboard shortcuts, and about section</li>
+<li><strong>Keyboard Shortcuts</strong> — <code>1</code>–<code>8</code> switch tabs, <code>Space</code> toggle BLE, <code>H</code> or <code>?</code> open help, <code>Esc</code> close modals</li>
+<li><strong>Documentation package:</strong></li>
+<li><code>README.md</code> + <code>README.html</code> — project overview, features, quick start, compatibility</li>
+<li><code>HOWTO.md</code> + <code>HOWTO.html</code> — detailed installation, usage, micro:bit setup, troubleshooting</li>
+<li><code>CHANGELOG.md</code> + <code>CHANGELOG.html</code> — version history (this file)</li>
+<li><strong>Links to documentation</strong> from within the Help modal</li>
+<li><strong>Version display</strong> updated to v1.1 in log footer and about section</li>
+</ul>
+<h3 id="changed_1">Changed</h3>
+<ul>
+<li>Version bumped from v1.0 → v1.1</li>
+<li>Responsive layout updated for help modal on mobile</li>
+<li>ZIP package naming convention: <code>morse-kids-lab-v{VERSION}.zip</code></li>
+</ul>
+<h3 id="fixed_1">Fixed</h3>
+<ul>
+<li>Help tab content now also accessible via floating button (redundant access paths for better UX)</li>
+</ul>
+<hr />
+<h2 id="v10-2025-02-22">[v1.0] — 2025-02-22</h2>
+<h3 id="added-initial-release">Added — Initial Release</h3>
+<h4 id="core-modules">Core Modules</h4>
+<ul>
+<li><strong>📚 Learn Tab</strong> — Interactive Morse code reference chart (A–Z, 0–9), click-to-hear audio playback</li>
+<li><strong>✏️ Encode Tab</strong> — Text → Morse encoder with real-time conversion, visual lamp flasher, audio playback, speed control (WPM), copy and BLE send</li>
+<li><strong>🔍 Decode Tab</strong> — Morse → Text decoder with live conversion, audio playback, hint for input format</li>
+<li><strong>👆 Tap Lab</strong> — Interactive tap button (short=dot, long=dash), auto letter/word detection, waveform visualization, decoded text output</li>
+<li><strong>🔊 Listen Station</strong> — Audio playback with adjustable frequency (400–1000 Hz) and speed (5–30 WPM), visual timeline with dot/dash indicators</li>
+<li><strong>🤖 micro:bit Lab</strong> — Real BLE connection via Web Bluetooth API, SVG micro:bit simulator with 5×5 LED matrix, send/receive Morse via Nordic UART Service, MicroPython firmware code with copy button</li>
+<li><strong>🏆 Challenge Zone</strong> — 4 game modes (Letter Quiz, Word Decode, Speed Round, SOS Challenge), scoring system with streak counter, local high score persistence</li>
+<li><strong>❓ Help Tab</strong> — Morse glossary, learning path (6 steps), security &amp; ethics section, troubleshooting guide</li>
+</ul>
+<h4 id="platform-features">Platform Features</h4>
+<ul>
+<li><strong>Trilingual UI</strong> — English, Français, العربية with full RTL support</li>
+<li><strong>6 Themes</strong> — Mosque Gold, Zellige Blue, Andalus Green, Space Explorer, Jungle Quest, Robot Lab</li>
+<li><strong>3 Skill Levels</strong> — 🟢 Newb (analogies), 🔵 Explorer (technical), 🟣 Developer (architecture)</li>
+<li><strong>Bismillah header</strong> — discreet, centered, calligraphy-inspired with ornaments</li>
+<li><strong>Activity Log</strong> — timestamped event log with clear/copy functionality</li>
+<li><strong>Toast Notifications</strong> — success/error/info toasts</li>
+<li><strong>Status Pill</strong> — BLE connection status indicator in header</li>
+<li><strong>Web Audio API</strong> — OscillatorNode-based Morse beep synthesis</li>
+<li><strong>BLE Architecture</strong> — Nordic UART Service (NUS), chunked TX (20-byte MTU), RX notifications, auto-reconnect (3 attempts)</li>
+<li><strong>CSS Theme System</strong> — 6 themes via CSS custom properties on <code>[data-theme]</code></li>
+<li><strong>Privacy-first</strong> — no server, no tracking, no cookies, all local</li>
+<li><strong>Responsive design</strong> — mobile-friendly layout</li>
+</ul>
+<h4 id="microbit-integration">micro:bit Integration</h4>
+<ul>
+<li>Web Bluetooth pairing with <code>BBC micro:bit</code> name prefix filter</li>
+<li>UART Service UUID: <code>6e400001-b5a3-f393-e0a9-e50e24dcca9e</code></li>
+<li>TX characteristic (notify): <code>6e400003-...</code></li>
+<li>RX characteristic (write): <code>6e400002-...</code></li>
+<li>Two-way communication: app sends text Morse, micro:bit sends button taps back</li>
+<li>SVG simulator with clickable A/B buttons and LED matrix</li>
+<li>MicroPython firmware provided in-app with copy button</li>
+</ul>
+<hr />
+<h2 id="version-naming-convention">Version Naming Convention</h2>
+<p><strong>Package format:</strong> <code>morse-kids-lab-v{MAJOR}.{MINOR}.zip</code></p>
+<ul>
+<li><strong>MAJOR</strong> — Breaking changes or complete rewrites</li>
+<li><strong>MINOR</strong> — New features, improvements, or fixes</li>
+</ul>
+  <div class="footer">
+    Morse Kids Lab v1.2 — Workshop DIY<br>
+    <a href="index.html">App</a> · <a href="README.html">README</a> · <a href="HOWTO.html">HOWTO</a> · <a href="CHANGES.html">Changes</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOWTO Guide — Morse Kids Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Righteous&family=Tajawal:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08091a; --panel: #0b0d24;
+  --accent: #d4a03c; --accent2: #0ea5e9;
+  --text: #e4ddd0; --text-muted: #8a7e6e;
+  --border: rgba(212,160,60,.18);
+  --code-bg: rgba(0,0,0,.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Tajawal', system-ui, sans-serif;
+  line-height: 1.7; padding: 20px;
+  display: flex; justify-content: center;
+}
+.doc {
+  max-width: 820px; width: 100%;
+  background: radial-gradient(ellipse at top, rgba(212,160,60,.08), transparent 55%), var(--panel);
+  border: 1px solid var(--border); border-radius: 18px;
+  padding: 30px 36px; margin: 20px 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.bismillah {
+  text-align: center; font-family: 'Amiri', serif;
+  font-size: 14px; color: var(--accent); opacity: .5;
+  margin-bottom: 20px;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none;
+  font-size: .82rem; font-weight: 600;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.3);
+  transition: all .2s; margin-bottom: 20px;
+}
+.back-link:hover { border-color: var(--accent); box-shadow: 0 0 12px rgba(212,160,60,.15); }
+h1 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1.8rem; letter-spacing: .04em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px; line-height: 1.3;
+}
+h2 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1.2rem; color: var(--accent);
+  margin: 28px 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: .04em;
+}
+h3 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1rem; color: var(--accent2);
+  margin: 20px 0 8px;
+}
+h4 {
+  font-size: .9rem; color: var(--accent);
+  margin: 14px 0 6px;
+}
+p { margin: 8px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: var(--text); }
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 8px 16px; margin: 12px 0;
+  background: rgba(0,0,0,.2); border-radius: 0 8px 8px 0;
+  color: var(--text-muted); font-style: italic;
+}
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .82em; background: var(--code-bg);
+  padding: 2px 6px; border-radius: 4px;
+  color: var(--accent2);
+}
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px; margin: 12px 0;
+  overflow-x: auto;
+}
+pre code {
+  background: none; padding: 0;
+  font-size: .78rem; line-height: 1.5;
+  color: var(--text-muted);
+}
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 12px 0; font-size: .84rem;
+}
+th {
+  background: rgba(212,160,60,.1);
+  color: var(--accent); font-weight: 700;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Righteous', sans-serif;
+  font-size: .78rem; letter-spacing: .04em;
+  text-transform: uppercase;
+}
+td {
+  padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.05);
+  color: var(--text-muted);
+}
+tr:hover td { background: rgba(255,255,255,.02); }
+ul, ol { margin: 8px 0; padding-left: 24px; }
+li { margin: 4px 0; color: var(--text-muted); }
+li strong { color: var(--text); }
+hr {
+  border: none; height: 1px; margin: 24px 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: .3;
+}
+kbd {
+  display: inline-block; padding: 2px 7px;
+  border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem; background: rgba(0,0,0,.4);
+  border: 1px solid var(--border); color: var(--accent);
+}
+.footer {
+  text-align: center; margin-top: 30px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: .76rem; color: var(--text-muted);
+}
+@media (max-width: 600px) {
+  .doc { padding: 20px 16px; }
+  h1 { font-size: 1.4rem; }
+  table { font-size: .76rem; }
+  th, td { padding: 6px 8px; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="bismillah">✦ بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ✦</div>
+  <a href="index.html" class="back-link">← Back to App</a>
+  <h1 id="howto-guide-morse-kids-lab-v12">📘 HOWTO Guide — Morse Kids Lab v1.2</h1>
+<blockquote>
+<p><strong>بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</strong></p>
+</blockquote>
+<p>A complete step-by-step guide for installing, using, and getting the most out of Morse Kids Lab.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-requirements">Requirements</a></li>
+<li><a href="#2-installation">Installation</a></li>
+<li><a href="#3-first-launch">First Launch</a></li>
+<li><a href="#4-app-tour--all-8-tabs">App Tour — All 8 Tabs</a></li>
+<li><a href="#5-microbit-ble-setup">micro:bit BLE Setup</a></li>
+<li><a href="#6-keyboard-shortcuts">Keyboard Shortcuts</a></li>
+<li><a href="#7-themes--languages">Themes &amp; Languages</a></li>
+<li><a href="#8-skill-levels">Skill Levels</a></li>
+<li><a href="#9-the-floating-help-button">The Floating Help Button</a></li>
+<li><a href="#10-troubleshooting">Troubleshooting</a></li>
+<li><a href="#11-for-parents--teachers">For Parents &amp; Teachers</a></li>
+<li><a href="#12-faq">FAQ</a></li>
+</ol>
+<hr />
+<h2 id="1-requirements">1. Requirements</h2>
+<h3 id="minimum-requirements-app-only">Minimum Requirements (App Only)</h3>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Browser</strong></td>
+<td>Any modern browser (Chrome, Firefox, Safari, Edge)</td>
+</tr>
+<tr>
+<td><strong>OS</strong></td>
+<td>Windows 10+, macOS 10.14+, Linux, Android 8+, iOS 14+</td>
+</tr>
+<tr>
+<td><strong>Screen</strong></td>
+<td>320px minimum width (mobile-friendly)</td>
+</tr>
+<tr>
+<td><strong>Audio</strong></td>
+<td>Speaker or headphones (for Morse beeps)</td>
+</tr>
+<tr>
+<td><strong>Internet</strong></td>
+<td>Only needed on first load for Google Fonts; fully offline after</td>
+</tr>
+</tbody>
+</table>
+<h3 id="for-ble-microbit-connection">For BLE micro:bit Connection</h3>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Browser</strong></td>
+<td>Chrome 56+ or Edge 79+ (Web Bluetooth required)</td>
+</tr>
+<tr>
+<td><strong>Bluetooth</strong></td>
+<td>Bluetooth 4.0+ (BLE support) on your computer/phone</td>
+</tr>
+<tr>
+<td><strong>micro:bit</strong></td>
+<td>BBC micro:bit V1.5 or V2 (V2 recommended for speaker)</td>
+</tr>
+<tr>
+<td><strong>USB cable</strong></td>
+<td>micro-USB (V1) or USB-C (V2) for flashing firmware</td>
+</tr>
+<tr>
+<td><strong>Firmware</strong></td>
+<td>MicroPython Morse firmware (provided in-app)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-installation">2. Installation</h2>
+<h3 id="method-a-direct-open-easiest">Method A: Direct Open (Easiest)</h3>
+<ol>
+<li><strong>Unzip</strong> the <code>morse-kids-lab-v1.2.zip</code> archive</li>
+<li><strong>Open</strong> <code>index.html</code> by double-clicking it in your file manager</li>
+<li>That's it! The app runs entirely in your browser</li>
+</ol>
+<blockquote>
+<p>⚠️ BLE will NOT work when opening via <code>file://</code> in most browsers. Use Method B for BLE.</p>
+</blockquote>
+<h3 id="method-b-local-server-required-for-ble">Method B: Local Server (Required for BLE)</h3>
+<p>Web Bluetooth needs a secure context (HTTPS or localhost).</p>
+<h4 id="option-1-python-pre-installed-on-maclinux">Option 1: Python (pre-installed on Mac/Linux)</h4>
+<pre><code class="language-bash"># Navigate to the app folder
+cd morse-kids-lab-v1.2
+
+# Start server
+python3 -m http.server 8000
+
+# Open in browser
+# → http://localhost:8000
+</code></pre>
+<h4 id="option-2-nodejs">Option 2: Node.js</h4>
+<pre><code class="language-bash"># Install serve globally (one time)
+npm install -g serve
+
+# Navigate and run
+cd morse-kids-lab-v1.2
+serve .
+
+# Open in browser
+# → http://localhost:3000
+</code></pre>
+<h4 id="option-3-php">Option 3: PHP</h4>
+<pre><code class="language-bash">cd morse-kids-lab-v1.2
+php -S localhost:8000
+
+# → http://localhost:8000
+</code></pre>
+<h4 id="option-4-vs-code-live-server-extension">Option 4: VS Code Live Server Extension</h4>
+<ol>
+<li>Install the <strong>Live Server</strong> extension in VS Code</li>
+<li>Open the <code>morse-kids-lab-v1.2</code> folder in VS Code</li>
+<li>Right-click <code>index.html</code> → <strong>Open with Live Server</strong></li>
+<li>Browser opens automatically at <code>http://127.0.0.1:5500</code></li>
+</ol>
+<h3 id="method-c-host-online">Method C: Host Online</h3>
+<p>Upload all files to any web hosting (GitHub Pages, Netlify, Vercel, etc.):</p>
+<pre><code class="language-bash"># GitHub Pages example
+git init
+git add .
+git commit -m &quot;Morse Kids Lab v1.2&quot;
+git remote add origin https://github.com/YOUR_USERNAME/morse-kids-lab.git
+git push -u origin main
+# Enable Pages in repository settings → Source: main branch
+</code></pre>
+<hr />
+<h2 id="3-first-launch">3. First Launch</h2>
+<p>When you first open the app, you'll see:</p>
+<ol>
+<li><strong>Bismillah header</strong> — elegant centered Arabic calligraphy at the top</li>
+<li><strong>App title</strong> — "Morse Kids Lab" with animated gradient</li>
+<li><strong>Header controls</strong> — Language (EN/FR/AR), Theme (6 options), Level (Newb/Explorer/Developer)</li>
+<li><strong>Status pill</strong> — "Disconnected" (red dot) — this shows BLE status</li>
+<li><strong>Tab bar</strong> — 8 tabs for all features</li>
+<li><strong>Learn tab</strong> — open by default with the Morse chart</li>
+<li><strong>Floating ? button</strong> — bottom-left, always visible</li>
+</ol>
+<p><strong>First thing to try:</strong> Click any letter in the Morse chart to hear it!</p>
+<hr />
+<h2 id="4-app-tour-all-8-tabs">4. App Tour — All 8 Tabs</h2>
+<h3 id="tab-1-learn">📚 Tab 1: Learn</h3>
+<p><strong>What:</strong> Interactive Morse code reference chart.</p>
+<p><strong>How to use:</strong>
+1. Browse all 36 characters (A–Z, 0–9)
+2. <strong>Click any character</strong> to hear its Morse code as audio beeps
+3. Read the level explanation (Newb/Explorer/Developer) for context
+4. Characters show the letter and its dot/dash pattern</p>
+<p><strong>Try this:</strong> Click <code>S</code> (···) then <code>O</code> (———) then <code>S</code> (···) — you just heard SOS!</p>
+<h3 id="tab-2-encode">✏️ Tab 2: Encode</h3>
+<p><strong>What:</strong> Type text → see and hear it as Morse code.</p>
+<p><strong>How to use:</strong>
+1. Type text in the input field (e.g., "HELLO")
+2. Watch the Morse output update in real-time below
+3. Click <strong>▶ Play</strong> to hear it as audio beeps
+4. Watch the <strong>lamp flasher</strong> blink with each dot and dash
+5. Adjust <strong>Speed (WPM)</strong> with the slider
+6. Click <strong>📋 Copy</strong> to copy the Morse to clipboard
+7. Click <strong>📡 Send to micro:bit</strong> if BLE is connected</p>
+<h3 id="tab-3-decode">🔍 Tab 3: Decode</h3>
+<p><strong>What:</strong> Paste Morse code → read the decoded text.</p>
+<p><strong>How to use:</strong>
+1. Type or paste Morse code using:
+   - <code>.</code> or <code>·</code> for dot (dit)
+   - <code>-</code> or <code>—</code> for dash (dah)
+   - Space between letters
+   - <code>/</code> between words
+2. Example: <code>.... . .-.. .-.. --- / .-- --- .-. .-.. -..</code>
+3. Decoded text appears below in real-time
+4. Click <strong>🔊 Play</strong> to hear the Morse code</p>
+<h3 id="tab-4-tap-lab">👆 Tab 4: Tap Lab</h3>
+<p><strong>What:</strong> Become a telegraph operator! Tap Morse code manually.</p>
+<p><strong>How to use:</strong>
+1. Press the big <strong>TAP</strong> button
+2. <strong>Short tap</strong> (&lt; 200ms) = dot (dit ·)
+3. <strong>Long press</strong> (≥ 200ms) = dash (dah —)
+4. <strong>Wait 600ms</strong> between letters (auto-detected)
+5. <strong>Wait 1400ms</strong> between words (auto-detected)
+6. Watch the waveform build up as you tap
+7. See your decoded text appear below</p>
+<p><strong>Challenge:</strong> Try tapping SOS — three short, three long, three short!</p>
+<h3 id="tab-5-listen-station">🔊 Tab 5: Listen Station</h3>
+<p><strong>What:</strong> Type a message and hear it as Morse audio with controls.</p>
+<p><strong>How to use:</strong>
+1. Type your message in the input field
+2. Adjust <strong>Frequency</strong> (pitch: 400–1000 Hz, default 700 Hz)
+3. Adjust <strong>Speed</strong> (5–30 WPM, default 15 WPM)
+4. Click <strong>▶ Play</strong> to hear the message
+5. Watch the <strong>visual timeline</strong> — dots and dashes light up as they play
+6. Click <strong>⏹ Stop</strong> to cancel playback</p>
+<p><strong>Pro tip:</strong> 700 Hz is the classic CW (Continuous Wave) frequency used by amateur radio operators!</p>
+<h3 id="tab-6-microbit-lab">🤖 Tab 6: micro:bit Lab</h3>
+<p><strong>What:</strong> Connect a real BBC micro:bit via Bluetooth and exchange Morse code.</p>
+<p><strong>Three sections:</strong></p>
+<p><strong>A. BLE Connection</strong>
+1. Click <strong>📡 Connect</strong> to scan for your micro:bit
+2. Select your micro:bit from the browser popup
+3. Status changes to green "Connected"
+4. See device name and connection info</p>
+<p><strong>B. Simulator</strong>
+- Use the on-screen SVG micro:bit even without hardware
+- Click <strong>A</strong> button = dot · (LED flashes small diamond)
+- Click <strong>B</strong> button = dash — (LED flashes big diamond)
+- Click <strong>🔄 Reset</strong> to clear</p>
+<p><strong>C. Send/Receive</strong>
+- Type a message → click <strong>📡 Send</strong> to send Morse to micro:bit
+- micro:bit buzzes and flashes each dot/dash
+- Press buttons A/B on physical micro:bit → app receives and decodes</p>
+<p><strong>D. Firmware Code</strong>
+- Expand the MicroPython section to see the firmware
+- Click <strong>📋 Copy Code</strong> to copy it
+- Flash to your micro:bit (see Section 5 below)</p>
+<h3 id="tab-7-challenge-zone">🏆 Tab 7: Challenge Zone</h3>
+<p><strong>What:</strong> Test your Morse knowledge with 4 game modes!</p>
+<p><strong>Game modes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>How it works</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔤 <strong>Letter Quiz</strong></td>
+<td>See a Morse pattern → pick the correct letter from 4 choices</td>
+</tr>
+<tr>
+<td>📝 <strong>Word Decode</strong></td>
+<td>Decode a complete word from Morse → type your answer</td>
+</tr>
+<tr>
+<td>⚡ <strong>Speed Round</strong></td>
+<td>Same as Letter Quiz but with a 10-second timer!</td>
+</tr>
+<tr>
+<td>🆘 <strong>SOS Challenge</strong></td>
+<td>Type the SOS Morse pattern correctly (··· ——— ···)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scoring:</strong>
+- Correct answer = +10 points (+20 in Speed Round)
+- Streak counter tracks consecutive correct answers
+- Best score saved locally (survives browser restart)
+- 3+ streak = 🔥 Awesome streak! message</p>
+<h3 id="tab-8-help">❓ Tab 8: Help</h3>
+<p><strong>What:</strong> Reference material and guides.</p>
+<p><strong>Includes:</strong>
+- <strong>Morse Glossary</strong> — Dit, Dah, WPM, Farnsworth, CW, SOS, BLE, UART, NUS, GATT, MTU, Encoding
+- <strong>Learning Path</strong> — 6-step guide from basics to BLE mastery
+- <strong>Security &amp; Ethics</strong> — Encoding vs. encryption, BLE security, respectful communication
+- <strong>Troubleshooting</strong> — BLE and audio common fixes</p>
+<hr />
+<h2 id="5-microbit-ble-setup">5. micro:bit BLE Setup</h2>
+<h3 id="step-by-step-microbit-firmware-installation">Step-by-Step micro:bit Firmware Installation</h3>
+<h4 id="what-you-need">What You Need</h4>
+<ul>
+<li>BBC micro:bit (V1.5 or V2)</li>
+<li>USB cable (micro-USB for V1, USB-C for V2)</li>
+<li>Computer with Chrome or Edge browser</li>
+</ul>
+<h4 id="step-1-get-the-firmware-code">Step 1: Get the Firmware Code</h4>
+<ol>
+<li>Open Morse Kids Lab in your browser</li>
+<li>Go to the <strong>🤖 micro:bit</strong> tab</li>
+<li>Scroll down to <strong>"micro:bit Firmware (MicroPython)"</strong></li>
+<li>Click the expand arrow to reveal the code</li>
+<li>Click <strong>📋 Copy Code</strong></li>
+</ol>
+<h4 id="step-2-flash-the-firmware">Step 2: Flash the Firmware</h4>
+<p><strong>Option A: python.microbit.org (Recommended)</strong></p>
+<ol>
+<li>Go to <a href="https://python.microbit.org">python.microbit.org</a></li>
+<li>Delete the default code in the editor</li>
+<li>Paste the copied firmware code</li>
+<li>Connect your micro:bit via USB</li>
+<li>Click <strong>Send to micro:bit</strong></li>
+<li>Wait for the yellow LED to stop flashing</li>
+</ol>
+<p><strong>Option B: Mu Editor</strong></p>
+<ol>
+<li>Download <a href="https://codewith.mu">Mu Editor</a></li>
+<li>Select "BBC micro:bit" mode</li>
+<li>Paste the firmware code</li>
+<li>Click <strong>Flash</strong></li>
+</ol>
+<h4 id="step-3-enable-bluetooth">Step 3: Enable Bluetooth</h4>
+<p>After flashing:
+1. Disconnect USB (the micro:bit runs on battery or USB power)
+2. The micro:bit is now advertising its Bluetooth name
+3. You should see "BBC micro:bit [xxxxx]" when scanning</p>
+<h4 id="step-4-connect-from-the-app">Step 4: Connect from the App</h4>
+<ol>
+<li>Open Morse Kids Lab at <code>http://localhost:8000</code> (or HTTPS URL)</li>
+<li>Go to <strong>🤖 micro:bit</strong> tab</li>
+<li>Click <strong>📡 Connect</strong></li>
+<li>A browser popup shows available devices</li>
+<li>Select your micro:bit (e.g., "BBC micro:bit [zutev]")</li>
+<li>Click <strong>Pair</strong> if prompted</li>
+<li>Status pill turns green: "Connected"</li>
+</ol>
+<h4 id="step-5-test-it">Step 5: Test It!</h4>
+<ul>
+<li>Type "SOS" in the Send field → click <strong>📡 Send</strong></li>
+<li>Your micro:bit buzzes ··· ——— ··· and flashes the LEDs!</li>
+<li>Press <strong>Button A</strong> on micro:bit → app shows a dot</li>
+<li>Press <strong>Button B</strong> on micro:bit → app shows a dash</li>
+</ul>
+<h3 id="wiring-optional-external-buzzer">Wiring (Optional External Buzzer)</h3>
+<p>For micro:bit V1 (no built-in speaker):</p>
+<pre><code>micro:bit Pin 0 ──── Buzzer + (positive)
+micro:bit GND   ──── Buzzer − (negative)
+</code></pre>
+<p>micro:bit V2 has a built-in speaker — no wiring needed!</p>
+<hr />
+<h2 id="6-keyboard-shortcuts">6. Keyboard Shortcuts</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code> – <code>8</code></td>
+<td>Switch between tabs</td>
+</tr>
+<tr>
+<td><code>Space</code></td>
+<td>Connect / Disconnect BLE</td>
+</tr>
+<tr>
+<td><code>H</code> or <code>?</code></td>
+<td>Open / Close help modal</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Close help modal</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Shortcuts are disabled when typing in input fields.</p>
+</blockquote>
+<hr />
+<h2 id="7-themes-languages">7. Themes &amp; Languages</h2>
+<h3 id="changing-theme">Changing Theme</h3>
+<p>Use the <strong>Theme</strong> dropdown in the top-right corner:</p>
+<table>
+<thead>
+<tr>
+<th>Theme</th>
+<th>Color Scheme</th>
+<th>Font Style</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🕌 Mosque Gold</td>
+<td>Deep navy + gold</td>
+<td>Righteous</td>
+</tr>
+<tr>
+<td>🔷 Zellige Blue</td>
+<td>Marine + cyan</td>
+<td>Righteous</td>
+</tr>
+<tr>
+<td>🌿 Andalus Green</td>
+<td>Forest + emerald</td>
+<td>Righteous</td>
+</tr>
+<tr>
+<td>🚀 Space</td>
+<td>Purple + cyan</td>
+<td>Orbitron</td>
+</tr>
+<tr>
+<td>🌴 Jungle</td>
+<td>Dark green + lime</td>
+<td>Bangers</td>
+</tr>
+<tr>
+<td>🤖 Robot</td>
+<td>Navy + blue</td>
+<td>Orbitron</td>
+</tr>
+</tbody>
+</table>
+<h3 id="changing-language">Changing Language</h3>
+<p>Use the <strong>Language</strong> dropdown:</p>
+<ul>
+<li><strong>EN</strong> — English (LTR)</li>
+<li><strong>FR</strong> — Français (LTR)</li>
+<li><strong>عربي</strong> — Arabic (RTL — entire layout flips automatically)</li>
+</ul>
+<hr />
+<h2 id="8-skill-levels">8. Skill Levels</h2>
+<p>Use the <strong>Level</strong> dropdown to change explanation depth:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Audience</th>
+<th>Style</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 <strong>Newb</strong></td>
+<td>Ages 8–10, beginners</td>
+<td>Fun analogies, simple words</td>
+</tr>
+<tr>
+<td>🔵 <strong>Explorer</strong></td>
+<td>Ages 11–13, curious learners</td>
+<td>Technical vocabulary, concepts</td>
+</tr>
+<tr>
+<td>🟣 <strong>Developer</strong></td>
+<td>Ages 14+, aspiring coders</td>
+<td>Architecture, protocols, code patterns</td>
+</tr>
+</tbody>
+</table>
+<p>Each tab shows a different explanation box based on your selected level.</p>
+<hr />
+<h2 id="9-the-floating-help-button">9. The Floating Help Button</h2>
+<p>The <strong>?</strong> button in the bottom-left corner is always visible:</p>
+<ul>
+<li><strong>Click it</strong> → opens the Help modal overlay</li>
+<li><strong>Help modal includes:</strong></li>
+<li>🚀 Quick Start (6 steps)</li>
+<li>🎛️ Controls reference</li>
+<li>📡 Morse basics (dit, dah, SOS)</li>
+<li>⌨️ Keyboard shortcuts</li>
+<li>ℹ️ About + links to docs</li>
+<li><strong>Close it</strong> → click ✕, click outside, or press <code>Esc</code></li>
+</ul>
+<hr />
+<h2 id="10-troubleshooting">10. Troubleshooting</h2>
+<h3 id="ble-wont-connect">BLE Won't Connect</h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No "Connect" popup</td>
+<td>Use Chrome or Edge (Firefox/Safari don't support Web Bluetooth)</td>
+</tr>
+<tr>
+<td>micro:bit not listed</td>
+<td>Make sure micro:bit is powered on and not connected to another device</td>
+</tr>
+<tr>
+<td>"UART characteristics not found"</td>
+<td>Re-flash the MicroPython firmware — the UART service may not be enabled</td>
+</tr>
+<tr>
+<td>Connection drops</td>
+<td>Stay within ~10m range; avoid other BLE interference</td>
+</tr>
+<tr>
+<td>"Web Bluetooth not available"</td>
+<td>Make sure you're on <code>localhost</code> or HTTPS (not <code>file://</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="audio-not-playing">Audio Not Playing</h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No sound on first click</td>
+<td>Click anywhere on the page first — browsers require a user gesture for audio</td>
+</tr>
+<tr>
+<td>Very quiet</td>
+<td>Check device volume; try adjusting the Frequency slider in Listen tab</td>
+</tr>
+<tr>
+<td>Distorted</td>
+<td>Lower the frequency or speed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="app-issues">App Issues</h3>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Layout broken</td>
+<td>Try a different browser or clear cache</td>
+</tr>
+<tr>
+<td>RTL not working</td>
+<td>Make sure you selected عربي from the Language dropdown</td>
+</tr>
+<tr>
+<td>Scores lost</td>
+<td>Scores use localStorage — clearing browser data resets them</td>
+</tr>
+<tr>
+<td>Fonts not loading</td>
+<td>You need internet on first load for Google Fonts</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-for-parents-teachers">11. For Parents &amp; Teachers</h2>
+<h3 id="educational-value">Educational Value</h3>
+<p>Morse Kids Lab teaches:</p>
+<ul>
+<li><strong>Encoding fundamentals</strong> — how information is represented in different forms</li>
+<li><strong>Binary concepts</strong> — Morse uses only 2 symbols, like computers use 0 and 1</li>
+<li><strong>Timing &amp; rhythm</strong> — precision in communication</li>
+<li><strong>IoT basics</strong> — real wireless communication with micro:bit</li>
+<li><strong>Security thinking</strong> — encoding vs. encryption, physical security, consent</li>
+<li><strong>Problem solving</strong> — decoding challenges and pattern recognition</li>
+</ul>
+<h3 id="classroom-use">Classroom Use</h3>
+<ul>
+<li>Works on school Chromebooks (Chrome supports Web Bluetooth)</li>
+<li>No installation needed — just serve from teacher's computer or school network</li>
+<li>No internet required after first load</li>
+<li>No accounts, no data collection, no tracking</li>
+<li>Students can work individually or in pairs (one sends, one receives via BLE)</li>
+<li>Challenge Zone provides built-in assessment</li>
+<li>3 skill levels allow differentiation within same activity</li>
+</ul>
+<h3 id="safety">Safety</h3>
+<ul>
+<li><strong>No network access</strong> — everything is local</li>
+<li><strong>No user data stored</strong> — only challenge scores in localStorage</li>
+<li><strong>BLE is consent-based</strong> — browser always asks permission</li>
+<li><strong>Content is age-appropriate</strong> — clean humor, respectful tone</li>
+<li><strong>Islam-friendly</strong> — respectful of cultural values</li>
+</ul>
+<hr />
+<h2 id="12-faq">12. FAQ</h2>
+<p><strong>Q: Do I need a micro:bit to use the app?</strong>
+A: No! The app works fully without hardware. The simulator provides a virtual micro:bit experience. BLE connection is optional.</p>
+<p><strong>Q: Does it work offline?</strong>
+A: Yes, after the first load (which fetches Google Fonts). All logic is local.</p>
+<p><strong>Q: Can two micro:bits communicate?</strong>
+A: The current firmware supports app ↔ micro:bit communication. For micro:bit ↔ micro:bit, you'd need the radio module (future feature).</p>
+<p><strong>Q: Is my data safe?</strong>
+A: Absolutely. No data leaves your device. No servers, no analytics, no cookies.</p>
+<p><strong>Q: Can I modify the app?</strong>
+A: Yes! It's pure HTML/CSS/JS — edit with any text editor.</p>
+<p><strong>Q: What's the recommended age?</strong>
+A: Ages 8–15, but the 3 skill levels make it accessible to younger kids and interesting for older ones.</p>
+<p><strong>Q: Why does BLE need Chrome?</strong>
+A: Web Bluetooth API is currently only supported in Chromium-based browsers (Chrome, Edge, Opera).</p>
+<hr />
+<p><em>Morse Kids Lab v1.2 — Workshop DIY · Built with ❤️ for young learners</em></p>
+  <div class="footer">
+    Morse Kids Lab v1.2 — Workshop DIY<br>
+    <a href="index.html">App</a> · <a href="README.html">README</a> · <a href="HOWTO.html">HOWTO</a> · <a href="CHANGES.html">Changes</a>
+  </div>
+</div>
+</body>
+</html>

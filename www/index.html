@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="mosque-gold">
+<head>
+<script src="cordova.js"></script>
+<script src="cordova_plugins.js"></script>
+<script src="web-bluetooth-shim.js"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Morse Kids Lab — Workshop DIY</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Righteous&family=Tajawal:wght@400;500;700&family=Bangers&family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app">
+    <div class="deco-band top-band" aria-hidden="true"></div>
+
+    <div class="rows-container">
+
+      <!-- ═══════════════════ HEADER ═══════════════════ -->
+      <div class="header">
+        <div class="bismillah" aria-hidden="true">
+          <span class="bism-ornament">&#x2726;</span>
+          بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+          <span class="bism-ornament">&#x2726;</span>
+        </div>
+
+        <div class="title-block">
+          <div class="logo-wrap" id="logoWrap"></div>
+          <div>
+            <h1 data-i18n="title">Morse Kids Lab</h1>
+            <div class="subtitle" data-i18n="subtitle">📡 learn · ✨ tap · 🔊 listen · 🤖 connect</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="header-dropdowns">
+            <select id="langSelect" class="mini-select" aria-label="Language">
+              <option value="en" selected>EN</option>
+              <option value="fr">FR</option>
+              <option value="ar">عربي</option>
+            </select>
+            <select id="themeSelect" class="mini-select" aria-label="Theme">
+              <option value="mosque-gold" data-i18n-opt="t_mosque">Mosque</option>
+              <option value="zellige" data-i18n-opt="t_zellige">Zellige</option>
+              <option value="andalus" data-i18n-opt="t_andalus">Andalus</option>
+              <option value="space" data-i18n-opt="t_space">Space</option>
+              <option value="jungle" data-i18n-opt="t_jungle">Jungle</option>
+              <option value="robot" data-i18n-opt="t_robot">Robot</option>
+            </select>
+            <select id="levelSelect" class="mini-select" aria-label="Level">
+              <option value="newb" data-i18n-opt="l_newb">🟢 Newb</option>
+              <option value="explorer" data-i18n-opt="l_explorer">🔵 Explorer</option>
+              <option value="developer" data-i18n-opt="l_developer">🟣 Developer</option>
+            </select>
+          </div>
+          <div class="status-pill" id="statusPill">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText" data-i18n="disconnected">Disconnected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ TAB NAV ═══════════════════ -->
+      <div class="tab-bar" id="tabBar">
+        <button class="tab-btn active" data-tab="learn"><span class="tab-icon">📚</span><span data-i18n="tabLearn">Learn</span></button>
+        <button class="tab-btn" data-tab="encode"><span class="tab-icon">✏️</span><span data-i18n="tabEncode">Encode</span></button>
+        <button class="tab-btn" data-tab="decode"><span class="tab-icon">🔍</span><span data-i18n="tabDecode">Decode</span></button>
+        <button class="tab-btn" data-tab="tap"><span class="tab-icon">👆</span><span data-i18n="tabTap">Tap</span></button>
+        <button class="tab-btn" data-tab="listen"><span class="tab-icon">🔊</span><span data-i18n="tabListen">Listen</span></button>
+        <button class="tab-btn" data-tab="microbit"><span class="tab-icon">🤖</span><span data-i18n="tabMicrobit">micro:bit</span></button>
+        <button class="tab-btn" data-tab="challenge"><span class="tab-icon">🏆</span><span data-i18n="tabChallenge">Challenge</span></button>
+        <button class="tab-btn" data-tab="help"><span class="tab-icon">❓</span><span data-i18n="tabHelp">Help</span></button>
+      </div>
+
+      <!-- ═══════════════════ LEARN TAB ═══════════════════ -->
+      <div class="tab-page active" id="page-learn">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">📚</span> <span data-i18n="learnTitle">Morse Code Reference</span></div>
+              <div class="card-subtitle"><span data-i18n="learnDesc">Click any character to hear it!</span></div>
+            </div>
+          </div>
+
+          <!-- Level explanations -->
+          <div class="level-box newb" data-level="newb">
+            <div class="level-tag">🟢 <span data-i18n="newb">Newb</span></div>
+            <p data-i18n="learnNewb">Morse Code is like a secret flashlight language! You use only TWO things: short blinks (dots ·) and long blinks (dashes —). Every letter has its own pattern. SOS is ··· ——— ··· and it saved thousands of lives at sea!</p>
+          </div>
+          <div class="level-box explorer" data-level="explorer">
+            <div class="level-tag">🔵 <span data-i18n="explorer">Explorer</span></div>
+            <p data-i18n="learnExplorer">Morse Code was invented by Samuel Morse in 1836 for telegraph communication. Each character is encoded as a sequence of dits (·) and dahs (—). Timing is everything: a dit is 1 unit, a dah is 3 units, space between parts of a letter is 1 unit, between letters is 3 units, between words is 7 units. Standard speed is measured in WPM (Words Per Minute).</p>
+          </div>
+          <div class="level-box developer" data-level="developer">
+            <div class="level-tag">🟣 <span data-i18n="developer">Developer</span></div>
+            <p data-i18n="learnDeveloper">Morse is a variable-length binary encoding — similar to Huffman coding. Frequent letters (E=·, T=—) get shorter codes. With only 2 symbols, it maps to a binary tree where left=dit, right=dah. This makes it a prefix-free code: no sequence is a prefix of another when timing is used. The ITU-R M.1677 standard defines international Morse. Signal-to-noise characteristics make it detectable even 10dB below noise floor — better than voice or digital modes.</p>
+          </div>
+
+          <!-- Morse chart -->
+          <div class="morse-chart" id="morseChart"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ ENCODE TAB ═══════════════════ -->
+      <div class="tab-page" id="page-encode">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">✏️</span> <span data-i18n="encodeTitle">Text → Morse Encoder</span></div>
+              <div class="card-subtitle" data-i18n="encodeDesc">Type text and see it in Morse code</div>
+            </div>
+          </div>
+
+          <div class="level-box newb" data-level="newb">
+            <div class="level-tag">🟢 <span data-i18n="newb">Newb</span></div>
+            <p data-i18n="encodeNewb">Type your name below and watch it turn into dots and dashes! It's like writing a secret message. Try typing SOS first!</p>
+          </div>
+          <div class="level-box explorer" data-level="explorer">
+            <div class="level-tag">🔵 <span data-i18n="explorer">Explorer</span></div>
+            <p data-i18n="encodeExplorer">The encoder converts each character to its Morse representation. Letters are separated by spaces, words by " / ". Unknown characters are shown as "?". Try using the visual flasher and audio playback!</p>
+          </div>
+          <div class="level-box developer" data-level="developer">
+            <div class="level-tag">🟣 <span data-i18n="developer">Developer</span></div>
+            <p data-i18n="encodeDeveloper">This encoder uses a lookup table with O(1) per-character conversion. The visual flasher uses the Web Audio API's OscillatorNode with precise setTimeout timing based on Paris standard (PARIS = 50 dit-units). When sending via BLE, dots/dashes are sent as UTF-8 text over the Nordic UART Service.</p>
+          </div>
+
+          <div class="control-section">
+            <label class="ctrl-label" data-i18n="inputText">Input Text</label>
+            <div class="input-row">
+              <input type="text" id="encodeInput" placeholder="Type here... e.g. SOS" data-i18n-ph="encodePh" maxlength="100" />
+              <button class="primary" id="encodePlayBtn"><span class="btn-icon">▶</span> <span data-i18n="play">Play</span></button>
+            </div>
+          </div>
+
+          <div class="morse-output-box" id="encodeOutput">
+            <div class="morse-text" id="encodeMorseText">···  ———  ···</div>
+          </div>
+
+          <!-- Visual flasher -->
+          <div class="flasher-row">
+            <div class="flasher-lamp" id="flasherLamp"></div>
+            <div class="flasher-controls">
+              <label class="ctrl-label" data-i18n="speed">Speed (WPM)</label>
+              <input type="range" class="range-ctrl" id="encodeSpeed" min="5" max="30" value="15" />
+              <span class="hint" id="encodeSpeedVal">15 WPM</span>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button id="encodeCopyBtn"><span class="btn-icon">📋</span> <span data-i18n="copy">Copy</span></button>
+            <button id="encodeBleBtn" disabled><span class="btn-icon">📡</span> <span data-i18n="sendBle">Send to micro:bit</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ DECODE TAB ═══════════════════ -->
+      <div class="tab-page" id="page-decode">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">🔍</span> <span data-i18n="decodeTitle">Morse → Text Decoder</span></div>
+              <div class="card-subtitle" data-i18n="decodeDesc">Paste Morse code to read it</div>
+            </div>
+          </div>
+
+          <div class="level-box newb" data-level="newb">
+            <div class="level-tag">🟢 <span data-i18n="newb">Newb</span></div>
+            <p data-i18n="decodeNewb">Got a secret Morse message? Paste it here using dots (.) and dashes (-). Use space between letters and slash (/) between words. Let's crack the code!</p>
+          </div>
+          <div class="level-box explorer" data-level="explorer">
+            <div class="level-tag">🔵 <span data-i18n="explorer">Explorer</span></div>
+            <p data-i18n="decodeExplorer">The decoder maps each dot-dash group to a character using a reverse lookup table. Standard separators: space between letters, " / " between words. Invalid sequences show as "?".</p>
+          </div>
+
+          <div class="control-section">
+            <label class="ctrl-label" data-i18n="inputMorse">Input Morse Code</label>
+            <div class="input-row">
+              <input type="text" id="decodeInput" placeholder="·· ·— — / ···· ·" data-i18n-ph="decodePh" />
+              <button class="primary" id="decodePlayBtn"><span class="btn-icon">🔊</span> <span data-i18n="play">Play</span></button>
+            </div>
+            <div class="hint" data-i18n="decodeHint">Use · or . for dit, — or - for dah, space between letters, / between words</div>
+          </div>
+
+          <div class="morse-output-box" id="decodeOutput">
+            <div class="decoded-text" id="decodeResultText">...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ TAP LAB TAB ═══════════════════ -->
+      <div class="tab-page" id="page-tap">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">👆</span> <span data-i18n="tapTitle">Tap Lab</span></div>
+              <div class="card-subtitle" data-i18n="tapDesc">Tap to send Morse code!</div>
+            </div>
+          </div>
+
+          <div class="level-box newb" data-level="newb">
+            <div class="level-tag">🟢 <span data-i18n="newb">Newb</span></div>
+            <p data-i18n="tapNewb">Press the big button below! Short tap = dot (dit), long press = dash (dah). Wait a moment between letters. It's like a telegraph operator!</p>
+          </div>
+          <div class="level-box explorer" data-level="explorer">
+            <div class="level-tag">🔵 <span data-i18n="explorer">Explorer</span></div>
+            <p data-i18n="tapExplorer">Timing thresholds: press &lt; 200ms = dit, press ≥ 200ms = dah. Gap ≥ 600ms = letter break. Gap ≥ 1400ms = word break. These follow Farnsworth timing principles.</p>
+          </div>
+
+          <div class="tap-zone">
+            <button class="tap-button" id="tapBtn">
+              <div class="tap-ripple" id="tapRipple"></div>
+              <span class="tap-label" data-i18n="tapHold">TAP</span>
+            </button>
+            <div class="tap-indicator">
+              <span class="tap-dot" id="tapDotIndicator">·</span>
+              <span class="tap-dash" id="tapDashIndicator">—</span>
+            </div>
+          </div>
+
+          <div class="morse-output-box">
+            <label class="ctrl-label" data-i18n="currentMorse">Current Morse</label>
+            <div class="morse-text" id="tapMorseOutput">···</div>
+          </div>
+          <div class="morse-output-box">
+            <label class="ctrl-label" data-i18n="decodedText">Decoded Text</label>
+            <div class="decoded-text" id="tapDecodedOutput">...</div>
+          </div>
+
+          <div class="tap-waveform" id="tapWaveform"></div>
+
+          <div class="btn-row">
+            <button id="tapClearBtn"><span class="btn-icon">🧹</span> <span data-i18n="clear">Clear</span></button>
+            <button id="tapBleBtn" disabled><span class="btn-icon">📡</span> <span data-i18n="sendBle">Send to micro:bit</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ LISTEN TAB ═══════════════════ -->
+      <div class="tab-page" id="page-listen">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">🔊</span> <span data-i18n="listenTitle">Listen Station</span></div>
+              <div class="card-subtitle" data-i18n="listenDesc">Hear Morse code played as audio</div>
+            </div>
+          </div>
+
+          <div class="level-box newb" data-level="newb">
+            <div class="level-tag">🟢 <span data-i18n="newb">Newb</span></div>
+            <p data-i18n="listenNewb">Type any word and press Play to hear it as beeps! Short beep = dot, long beep = dash. This is exactly what radio operators hear!</p>
+          </div>
+
+          <div class="control-section">
+            <label class="ctrl-label" data-i18n="message">Message</label>
+            <div class="input-row">
+              <input type="text" id="listenInput" placeholder="Type a message..." data-i18n-ph="listenPh" maxlength="100" />
+            </div>
+          </div>
+
+          <div class="control-section" style="margin-top:8px">
+            <div class="controls-grid">
+              <div>
+                <label class="ctrl-label" data-i18n="frequency">Frequency (Hz)</label>
+                <input type="range" class="range-ctrl" id="listenFreq" min="400" max="1000" value="700" />
+                <span class="hint" id="listenFreqVal">700 Hz</span>
+              </div>
+              <div>
+                <label class="ctrl-label" data-i18n="speed">Speed (WPM)</label>
+                <input type="range" class="range-ctrl" id="listenSpeed" min="5" max="30" value="15" />
+                <span class="hint" id="listenSpeedVal">15 WPM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-row" style="margin-top:10px">
+            <button class="primary" id="listenPlayBtn"><span class="btn-icon">▶</span> <span data-i18n="play">Play</span></button>
+            <button id="listenStopBtn"><span class="btn-icon">⏹</span> <span data-i18n="stop">Stop</span></button>
+          </div>
+
+          <!-- Visual timeline -->
+          <div class="listen-timeline" id="listenTimeline"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ MICRO:BIT TAB ═══════════════════ -->
+      <div class="tab-page" id="page-microbit">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">🤖</span> <span data-i18n="microbitTitle">micro:bit Lab</span></div>
+              <div class="card-subtitle" data-i18n="microbitDesc">Connect & communicate via Bluetooth</div>
+            </div>
+          </div>
+
+          <div class="level-box newb" data-level="newb">
+            <div class="level-tag">🟢 <span data-i18n="newb">Newb</span></div>
+            <p data-i18n="microbitNewb">Your micro:bit is a tiny computer that can talk to this app using Bluetooth — like a secret walkie-talkie! Press Connect, then send Morse messages and watch your micro:bit buzz and flash!</p>
+          </div>
+          <div class="level-box explorer" data-level="explorer">
+            <div class="level-tag">🔵 <span data-i18n="explorer">Explorer</span></div>
+            <p data-i18n="microbitExplorer">BLE (Bluetooth Low Energy) uses the Nordic UART Service (NUS) to create a serial-like connection. The app sends dots/dashes as text characters. The micro:bit receives them via UART and controls buzzer + LEDs accordingly. Range: ~10m — that's physical security!</p>
+          </div>
+          <div class="level-box developer" data-level="developer">
+            <div class="level-tag">🟣 <span data-i18n="developer">Developer</span></div>
+            <p data-i18n="microbitDeveloper">Web Bluetooth API exposes GATT services. NUS UUIDs: Service 6E400001-..., TX (notify) 6E400003-..., RX (write) 6E400002-.... Data is UTF-8 over a 20-byte MTU. The micro:bit firmware parses single chars: '.'=dit beep (200ms), '-'=dah beep (600ms), ' '=letter gap, '/'=word gap. Two-way: buttons A/B on micro:bit send '.' and '-' back via TX characteristic.</p>
+          </div>
+
+          <!-- BLE Connection -->
+          <div class="control-section ble-section">
+            <div class="section-header">
+              <div class="section-title"><span class="icon">📡</span> <span data-i18n="bleConnection">BLE Connection</span></div>
+            </div>
+            <div class="ble-info" id="bleInfo">
+              <div class="ble-row"><span class="ble-label" data-i18n="device">Device:</span> <span id="deviceName">—</span></div>
+              <div class="ble-row"><span class="ble-label">RSSI:</span> <span id="rssiVal">—</span></div>
+            </div>
+            <div class="btn-row">
+              <button class="primary" id="connectBtn"><span class="btn-icon">📡</span> <span data-i18n="connect">Connect</span></button>
+              <button id="disconnectBtn" disabled><span class="btn-icon">🔌</span> <span data-i18n="disconnect">Disconnect</span></button>
+            </div>
+            <div class="hint" id="bleHint" data-i18n="bleHint">Requires Chrome/Edge. Make sure your micro:bit has the Morse firmware.</div>
+          </div>
+
+          <!-- micro:bit Simulator -->
+          <div class="control-section" style="margin-top:10px">
+            <div class="section-header">
+              <div class="section-title"><span class="icon">💡</span> <span data-i18n="simulator">Simulator</span></div>
+              <div class="section-subtitle" data-i18n="simDesc">Virtual micro:bit — try without hardware!</div>
+            </div>
+            <div class="microbit-sim">
+              <svg id="microbitSvg" viewBox="0 0 200 160" class="microbit-board">
+                <!-- Board body -->
+                <rect x="10" y="10" width="180" height="140" rx="12" class="mb-body"/>
+                <!-- Edge connector -->
+                <rect x="30" y="140" width="140" height="12" rx="2" class="mb-edge"/>
+                <rect x="45" y="142" width="8" height="8" rx="1" class="mb-pin"/>
+                <rect x="72" y="142" width="8" height="8" rx="1" class="mb-pin"/>
+                <rect x="96" y="142" width="8" height="8" rx="1" class="mb-pin"/>
+                <rect x="120" y="142" width="8" height="8" rx="1" class="mb-pin"/>
+                <rect x="147" y="142" width="8" height="8" rx="1" class="mb-pin"/>
+                <!-- LED matrix 5x5 -->
+                <g id="ledMatrix" transform="translate(65,30)">
+                  <!-- Row 0 --><rect x="0" y="0" width="10" height="10" rx="2" class="led off" data-r="0" data-c="0"/><rect x="16" y="0" width="10" height="10" rx="2" class="led off" data-r="0" data-c="1"/><rect x="32" y="0" width="10" height="10" rx="2" class="led off" data-r="0" data-c="2"/><rect x="48" y="0" width="10" height="10" rx="2" class="led off" data-r="0" data-c="3"/><rect x="64" y="0" width="10" height="10" rx="2" class="led off" data-r="0" data-c="4"/>
+                  <!-- Row 1 --><rect x="0" y="16" width="10" height="10" rx="2" class="led off" data-r="1" data-c="0"/><rect x="16" y="16" width="10" height="10" rx="2" class="led off" data-r="1" data-c="1"/><rect x="32" y="16" width="10" height="10" rx="2" class="led off" data-r="1" data-c="2"/><rect x="48" y="16" width="10" height="10" rx="2" class="led off" data-r="1" data-c="3"/><rect x="64" y="16" width="10" height="10" rx="2" class="led off" data-r="1" data-c="4"/>
+                  <!-- Row 2 --><rect x="0" y="32" width="10" height="10" rx="2" class="led off" data-r="2" data-c="0"/><rect x="16" y="32" width="10" height="10" rx="2" class="led off" data-r="2" data-c="1"/><rect x="32" y="32" width="10" height="10" rx="2" class="led off" data-r="2" data-c="2"/><rect x="48" y="32" width="10" height="10" rx="2" class="led off" data-r="2" data-c="3"/><rect x="64" y="32" width="10" height="10" rx="2" class="led off" data-r="2" data-c="4"/>
+                  <!-- Row 3 --><rect x="0" y="48" width="10" height="10" rx="2" class="led off" data-r="3" data-c="0"/><rect x="16" y="48" width="10" height="10" rx="2" class="led off" data-r="3" data-c="1"/><rect x="32" y="48" width="10" height="10" rx="2" class="led off" data-r="3" data-c="2"/><rect x="48" y="48" width="10" height="10" rx="2" class="led off" data-r="3" data-c="3"/><rect x="64" y="48" width="10" height="10" rx="2" class="led off" data-r="3" data-c="4"/>
+                  <!-- Row 4 --><rect x="0" y="64" width="10" height="10" rx="2" class="led off" data-r="4" data-c="0"/><rect x="16" y="64" width="10" height="10" rx="2" class="led off" data-r="4" data-c="1"/><rect x="32" y="64" width="10" height="10" rx="2" class="led off" data-r="4" data-c="2"/><rect x="48" y="64" width="10" height="10" rx="2" class="led off" data-r="4" data-c="3"/><rect x="64" y="64" width="10" height="10" rx="2" class="led off" data-r="4" data-c="4"/>
+                </g>
+                <!-- Button A -->
+                <circle cx="30" cy="65" r="12" class="mb-btn" id="simBtnA"/>
+                <text x="30" y="69" text-anchor="middle" class="mb-btn-label">A</text>
+                <!-- Button B -->
+                <circle cx="170" cy="65" r="12" class="mb-btn" id="simBtnB"/>
+                <text x="170" y="69" text-anchor="middle" class="mb-btn-label">B</text>
+              </svg>
+              <div class="sim-controls">
+                <button id="simBtnAClick" class="sim-hw-btn"><span>A</span> <span data-i18n="dot">Dot ·</span></button>
+                <button id="simBtnBClick" class="sim-hw-btn"><span>B</span> <span data-i18n="dash">Dash —</span></button>
+                <button id="simResetBtn" class="btn-sm"><span class="btn-icon">🔄</span> <span data-i18n="reset">Reset</span></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Send Morse to micro:bit -->
+          <div class="control-section" style="margin-top:10px">
+            <div class="section-header">
+              <div class="section-title"><span class="icon">📤</span> <span data-i18n="sendMorse">Send Morse</span></div>
+            </div>
+            <div class="input-row">
+              <input type="text" id="bleSendInput" placeholder="Type message..." data-i18n-ph="bleSendPh" maxlength="60" />
+              <button class="primary" id="bleSendBtn" disabled><span class="btn-icon">📡</span> <span data-i18n="send">Send</span></button>
+            </div>
+          </div>
+
+          <!-- Received from micro:bit -->
+          <div class="control-section" style="margin-top:10px">
+            <div class="section-header">
+              <div class="section-title"><span class="icon">📥</span> <span data-i18n="received">Received from micro:bit</span></div>
+            </div>
+            <div class="morse-output-box">
+              <div class="morse-text" id="bleRxMorse">—</div>
+              <div class="decoded-text" id="bleRxText">—</div>
+            </div>
+          </div>
+
+          <!-- MicroPython code preview -->
+          <details class="collapsible" style="margin-top:10px">
+            <summary><span class="icon">🐍</span> <span data-i18n="firmwareCode">micro:bit Firmware (MicroPython)</span></summary>
+            <div class="card">
+              <pre class="code-block"><code id="firmwareCode">from microbit import *
+import music
+
+uart.init(baudrate=115200)
+DOT_MS  = 200
+DASH_MS = 600
+FREQ    = 800
+
+while True:
+    # RECEIVE from app → beep + flash
+    if uart.any():
+        ch = uart.read(1)
+        if ch:
+            c = chr(ch[0])
+            if c == '.':
+                display.show(Image.DIAMOND_SMALL)
+                music.pitch(FREQ, DOT_MS)
+                display.clear()
+            elif c == '-':
+                display.show(Image.DIAMOND)
+                music.pitch(FREQ, DASH_MS)
+                display.clear()
+            elif c == ' ':
+                sleep(DASH_MS)
+            elif c == '/':
+                sleep(DASH_MS * 2)
+            sleep(100)
+
+    # SEND to app → button press
+    if button_a.was_pressed():
+        uart.write('.')
+        display.show(Image.DIAMOND_SMALL)
+        sleep(150)
+        display.clear()
+    if button_b.was_pressed():
+        uart.write('-')
+        display.show(Image.DIAMOND)
+        sleep(150)
+        display.clear()
+
+    sleep(30)</code></pre>
+              <div class="btn-row">
+                <button id="copyFirmwareBtn"><span class="btn-icon">📋</span> <span data-i18n="copyCode">Copy Code</span></button>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ CHALLENGE TAB ═══════════════════ -->
+      <div class="tab-page" id="page-challenge">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">🏆</span> <span data-i18n="challengeTitle">Challenge Zone</span></div>
+              <div class="card-subtitle" data-i18n="challengeDesc">Test your Morse skills!</div>
+            </div>
+          </div>
+
+          <!-- Score -->
+          <div class="score-bar">
+            <div class="score-item"><span data-i18n="score">Score</span>: <strong id="scoreVal">0</strong></div>
+            <div class="score-item"><span data-i18n="streak">Streak</span>: <strong id="streakVal">0</strong> 🔥</div>
+            <div class="score-item"><span data-i18n="best">Best</span>: <strong id="bestVal">0</strong></div>
+          </div>
+
+          <!-- Challenge mode selector -->
+          <div class="challenge-modes">
+            <button class="challenge-mode-btn active" data-mode="letter"><span>🔤</span> <span data-i18n="letterQuiz">Letter Quiz</span></button>
+            <button class="challenge-mode-btn" data-mode="word"><span>📝</span> <span data-i18n="wordDecode">Word Decode</span></button>
+            <button class="challenge-mode-btn" data-mode="speed"><span>⚡</span> <span data-i18n="speedRound">Speed Round</span></button>
+            <button class="challenge-mode-btn" data-mode="sos"><span>🆘</span> <span data-i18n="sosChallenge">SOS Challenge</span></button>
+          </div>
+
+          <!-- Challenge area -->
+          <div class="challenge-area" id="challengeArea">
+            <div class="challenge-prompt" id="challengePrompt">
+              <div class="challenge-morse" id="challengeMorse">· · ·</div>
+              <div class="challenge-hint" id="challengeHint" data-i18n="pressStart">Press Start to begin!</div>
+            </div>
+            <div class="challenge-options" id="challengeOptions"></div>
+            <div class="challenge-timer" id="challengeTimer"></div>
+            <div class="challenge-feedback" id="challengeFeedback"></div>
+          </div>
+
+          <div class="btn-row">
+            <button class="primary" id="challengeStartBtn"><span class="btn-icon">🚀</span> <span data-i18n="start">Start</span></button>
+            <button id="challengeSkipBtn" disabled><span class="btn-icon">⏭</span> <span data-i18n="skip">Skip</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ HELP TAB ═══════════════════ -->
+      <div class="tab-page" id="page-help">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="icon">❓</span> <span data-i18n="helpTitle">Help & Guide</span></div>
+              <div class="card-subtitle" data-i18n="helpDesc">Everything you need to know</div>
+            </div>
+          </div>
+
+          <details class="collapsible">
+            <summary><span class="icon">📖</span> <span data-i18n="glossary">Morse Glossary</span></summary>
+            <div class="card">
+              <div class="glossary" id="glossaryContent"></div>
+            </div>
+          </details>
+
+          <details class="collapsible">
+            <summary><span class="icon">🗺️</span> <span data-i18n="learningPath">Learning Path</span></summary>
+            <div class="card">
+              <div class="learning-path">
+                <div class="path-step"><span class="path-num">1</span><span data-i18n="step1">Learn the Morse alphabet in the Learn tab</span></div>
+                <div class="path-step"><span class="path-num">2</span><span data-i18n="step2">Encode your name in the Encode tab</span></div>
+                <div class="path-step"><span class="path-num">3</span><span data-i18n="step3">Try tapping SOS in the Tap Lab</span></div>
+                <div class="path-step"><span class="path-num">4</span><span data-i18n="step4">Listen to messages in the Listen Station</span></div>
+                <div class="path-step"><span class="path-num">5</span><span data-i18n="step5">Connect your micro:bit via BLE</span></div>
+                <div class="path-step"><span class="path-num">6</span><span data-i18n="step6">Beat the Challenge Zone quizzes!</span></div>
+              </div>
+            </div>
+          </details>
+
+          <details class="collapsible">
+            <summary><span class="icon">🔒</span> <span data-i18n="securityEthics">Security & Ethics</span></summary>
+            <div class="card">
+              <p data-i18n="securityText">Morse Code is encoding, NOT encryption — anyone who knows the code can read your message! This is an important cybersecurity concept. In the old days, militaries added extra ciphers on top of Morse to keep messages secret. BLE is short-range (~10m), which provides physical security. Always communicate respectfully, even in code!</p>
+            </div>
+          </details>
+
+          <details class="collapsible">
+            <summary><span class="icon">🔧</span> <span data-i18n="troubleshoot">Troubleshooting</span></summary>
+            <div class="card">
+              <p data-i18n="troubleshootText">If BLE won't connect: Make sure you use Chrome/Edge browser. Enable Bluetooth on your device. Flash the MicroPython firmware to your micro:bit. If audio won't play: Click anywhere on the page first (browsers require user gesture for audio). Check that your device volume is on.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ LOG ═══════════════════ -->
+      <details class="collapsible">
+        <summary><span class="icon">📜</span> <span data-i18n="activityLog">Activity Log</span></summary>
+        <div class="card log-card">
+          <div class="card-header">
+            <div class="card-subtitle" data-i18n="eventsMsg">Events &amp; messages</div>
+            <div class="log-controls">
+              <button id="clearLogBtn" class="btn-sm"><span class="btn-icon">🧹</span><span data-i18n="clear">Clear</span></button>
+              <button id="copyLogBtn" class="btn-sm"><span class="btn-icon">📋</span><span data-i18n="copy">Copy</span></button>
+            </div>
+          </div>
+          <div class="log" id="logContainer" aria-live="polite"></div>
+          <div class="log-footer">
+            <span>Morse Kids Lab</span>
+            <span class="badge"><strong>v1.2</strong></span>
+          </div>
+        </div>
+      </details>
+
+    </div>
+    <div class="deco-band bottom-band" aria-hidden="true"></div>
+  </div>
+
+  <!-- Floating Help Button -->
+  <button class="fab-help" id="fabHelp" aria-label="Help" title="Help / مساعدة / Aide">
+    <span class="fab-icon">?</span>
+  </button>
+
+  <!-- Help Modal Overlay -->
+  <div class="help-modal-overlay" id="helpModal">
+    <div class="help-modal">
+      <div class="help-modal-header">
+        <span class="help-modal-title" data-i18n="helpTitle">❓ Help & Guide</span>
+        <button class="help-modal-close" id="helpModalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="help-modal-body">
+
+        <div class="help-section">
+          <h3 data-i18n="quickStart">🚀 Quick Start</h3>
+          <div class="help-steps">
+            <div class="help-step"><span class="help-step-num">1</span><span data-i18n="qs1">Open the <strong>Learn</strong> tab to see the Morse alphabet — click any letter to hear it!</span></div>
+            <div class="help-step"><span class="help-step-num">2</span><span data-i18n="qs2">Go to <strong>Encode</strong> — type your name and press ▶ Play to hear it in Morse.</span></div>
+            <div class="help-step"><span class="help-step-num">3</span><span data-i18n="qs3">Try the <strong>Tap Lab</strong> — short tap = dot, long press = dash. Tap SOS!</span></div>
+            <div class="help-step"><span class="help-step-num">4</span><span data-i18n="qs4">Use <strong>Listen Station</strong> to adjust speed and pitch of the Morse beeps.</span></div>
+            <div class="help-step"><span class="help-step-num">5</span><span data-i18n="qs5">Connect a real <strong>micro:bit</strong> via Bluetooth in the micro:bit Lab tab.</span></div>
+            <div class="help-step"><span class="help-step-num">6</span><span data-i18n="qs6">Test yourself in the <strong>Challenge Zone</strong> — letter quiz, word decode, speed round!</span></div>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3 data-i18n="controls">🎛️ Controls</h3>
+          <div class="help-grid">
+            <div class="help-grid-item"><strong data-i18n="hLang">Language</strong><span data-i18n="hLangDesc">Switch EN / FR / عربي from the top-right dropdown</span></div>
+            <div class="help-grid-item"><strong data-i18n="hTheme">Theme</strong><span data-i18n="hThemeDesc">6 themes: Mosque, Zellige, Andalus, Space, Jungle, Robot</span></div>
+            <div class="help-grid-item"><strong data-i18n="hLevel">Level</strong><span data-i18n="hLevelDesc">🟢 Newb (simple) · 🔵 Explorer (technical) · 🟣 Developer (advanced)</span></div>
+            <div class="help-grid-item"><strong data-i18n="hBle">BLE</strong><span data-i18n="hBleDesc">Requires Chrome/Edge. micro:bit needs Morse firmware (see micro:bit tab)</span></div>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3 data-i18n="morseBasics">📡 Morse Basics</h3>
+          <div class="help-morse-ref">
+            <div class="help-morse-item"><span class="hm-symbol">·</span> <span data-i18n="ditDesc">Dit — short signal (1 unit)</span></div>
+            <div class="help-morse-item"><span class="hm-symbol">—</span> <span data-i18n="dahDesc">Dah — long signal (3 units)</span></div>
+            <div class="help-morse-item"><span class="hm-symbol">···</span> <span data-i18n="sosDesc">S = three dits</span></div>
+            <div class="help-morse-item"><span class="hm-symbol">———</span> <span data-i18n="oDesc">O = three dahs</span></div>
+            <div class="help-morse-item"><span class="hm-symbol">··· ——— ···</span> <span data-i18n="sosFullDesc">SOS = the most famous Morse signal!</span></div>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3 data-i18n="keyboard">⌨️ Keyboard Shortcuts</h3>
+          <div class="help-grid">
+            <div class="help-grid-item"><kbd>1</kbd>–<kbd>8</kbd><span data-i18n="kTabs">Switch between tabs</span></div>
+            <div class="help-grid-item"><kbd>Space</kbd><span data-i18n="kConnect">Connect / Disconnect BLE</span></div>
+            <div class="help-grid-item"><kbd>Esc</kbd><span data-i18n="kClose">Close this help window</span></div>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <h3 data-i18n="about">ℹ️ About</h3>
+          <p data-i18n="aboutText">Morse Kids Lab v1.2 — A fun educational app to learn Morse code, connect to micro:bit via BLE, and master radio communication fundamentals. Built with ❤️ for young learners.</p>
+          <p class="help-footer-links">
+            <a href="README.html" target="_blank">📖 README</a> ·
+            <a href="HOWTO.html" target="_blank">📘 HOWTO Guide</a> ·
+            <a href="CHANGES.html" target="_blank">📋 Changes</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
